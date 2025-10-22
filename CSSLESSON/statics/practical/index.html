@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Portfolio</title>
+
+  <!--
+    Simple CSS so beginners can read it easily.
+    Comments show what each block styles.
+  -->
+  <style>
+    /* ---------- Basic reset ---------- */
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #222; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- Page wrapper (center content) ---------- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ---------- HEADER (logo + nav + CTA) ---------- */
+    header {
+      background: #f2f4f7;           /* light band like the design */
+      border-bottom: 1px solid #e6e9ee;
+      position: sticky; top: 0;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+    .logo { font-weight: 700; color: #5563d6; } /* small brand */
+    nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; }
+    .btn-cta {
+      background: #5563d6; color: #fff; padding: 8px 14px; border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* ---------- HERO (big colored band with left text / right card) ---------- */
+    .hero {
+      background: #5563d6; color: white; padding: 60px 0;
+    }
+    .hero-row {
+      display: flex; gap: 24px; align-items: center;
+    }
+    /* Left column of hero */
+    .hero-left { flex: 1; }
+    .hero-title { font-size: 34px; margin: 0 0 12px; font-weight: 800; line-height: 1.05; }
+    .hero-text { max-width: 520px; opacity: 0.95; margin: 0; }
+    .hero-actions { margin-top: 16px; display: flex; gap: 12px; }
+    .btn-outline { padding: 8px 12px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.3); color: white; }
+
+    /* Right column (mock card) */
+    .hero-right { width: 300px; display:flex; justify-content:center; }
+    .card-mock { background: #eef3f6; width: 280px; height: 170px; border-radius: 10px;
+                 display:flex; align-items:center; justify-content:center; box-shadow: 0 12px 20px rgba(0,0,0,0.12); color: #5563d6; font-weight:700; }
+
+    /* ---------- ABOUT (light background, small cards) ---------- */
+    .about { background: #f5f7f9; padding: 48px 0; color: #222; text-align: center; }
+    .about .subtitle { max-width: 640px; margin: 0 auto 20px; color: #666; }
+    .skills { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+    .skill { background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.04); min-width: 150px; }
+
+    /* ---------- PROJECTS (grid of cards) ---------- */
+    .projects { padding: 40px 0; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .project { background: white; border-radius: 10px; padding: 14px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .project-top { height: 70px; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: white; font-weight:700; margin-bottom: 12px; }
+    .p1 { background: linear-gradient(90deg,#7b83f9,#5f6ef5); }
+    .p2 { background: linear-gradient(90deg,#7b4bd7,#8657ce); }
+    .p3 { background: linear-gradient(90deg,#f0a5ff,#e08cff); }
+    .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .badge { background:#f2f4f7; padding:4px 8px; border-radius:999px; font-size:12px; color:#666; }
+
+    /* ---------- CONTACT (dark background, two columns) ---------- */
+    .contact { background: #2f3b46; color: white; padding: 48px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
+    .card-form { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; }
+    input, textarea { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); background: transparent; color: white; }
+    label { font-size: 13px; display:block; margin-bottom:6px; color: #ddd; }
+    .send { margin-top: 8px; padding: 8px 12px; border-radius:999px; background: #5563d6; color:white; border:none; cursor:pointer; }
+
+    /* ---------- Footer small text ---------- */
+    footer { text-align:center; color: rgba(255,255,255,0.6); padding: 12px 0 40px; }
+
+    /* ---------- Simple responsive rules ---------- */
+    @media (max-width: 920px) {
+      .hero-row { flex-direction: column; align-items: flex-start; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-right { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ==========
+       Use <header> for the top. Put your logo, nav links and a CTA button here.
+       Add or remove links as needed.
+  -->
+  <header>
+    <div class="container nav">
+      <div class="logo">Portfolio</div>
+
+      <!-- Main navigation -->
+      <nav>
+        <ul>
+          <li style="display:inline"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Call-to-action -->
+      <a class="btn-cta" href="#contact">Get Started</a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ==========
+       Big title area. Build this first to get page spacing right.
+       .hero-left contains text. .hero-right contains the small mock card.
+  -->
+  <section class="hero">
+    <div class="container hero-row">
+      <div class="hero-left">
+        <p style="margin:0;font-weight:700">Creative Web</p>
+        <h1 class="hero-title">Creative Web<br>Developer</h1>
+        <p class="hero-text">I create clean, responsive websites that deliver great user experiences. Let's bring your ideas to life.</p>
+        <div class="hero-actions">
+          <a class="btn-outline" href="#projects">View My Work</a>
+          <a class="btn-cta" href="#contact">Hire Me</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card-mock">Dev</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ==========
+       Small intro and skill boxes. Use simple boxes so you can reuse .skill elsewhere.
+  -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 style="margin:0 0 8px">About Me</h2>
+      <p class="subtitle">Passionate about creating digital experiences that make a difference.</p>
+
+      <div class="skills">
+        <div class="skill"><strong>Frontend</strong><div style="color:#666;font-size:13px">React, HTML, CSS</div></div>
+        <div class="skill"><strong>Backend</strong><div style="color:#666;font-size:13px">Node, Python</div></div>
+        <div class="skill"><strong>Database</strong><div style="color:#666;font-size:13px">MySQL, MongoDB</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ==========
+       Use .project for each card. You can copy/paste this block to add more.
+  -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="projects-grid">
+        <div class="project">
+          <div class="project-top p1">E-commerce Site</div>
+          <h3 style="margin:6px 0">E-commerce Platform</h3>
+          <p style="color:#666;font-size:14px;margin:0">Online store with cart and dashboard.</p>
+          <div class="badges"><span class="badge">React</span><span class="badge">Node.js</span></div>
+        </div>
+
+        <div class="project">
+          <div class="project-top p2">Dashboard App</div>
+          <h3 style="margin:6px 0">Analytics Dashboard</h3>
+          <p style="color:#666;font-size:14px;margin:0">Real-time charts and reports.</p>
+          <div class="badges"><span class="badge">Vue.js</span><span class="badge">D3</span></div>
+        </div>
+
+        <div class="project">
+          <div class="project-top p3">Mobile App</div>
+          <h3 style="margin:6px 0">Mobile Web App</h3>
+          <p style="color:#666;font-size:14px;margin:0">PWA with offline support.</p>
+          <div class="badges"><span class="badge">PWA</span><span class="badge">Firebase</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ==========
+       Left side: contact info and short text.
+       Right side: a simple form (demo only).
+  -->
+  <section id="contact" class="contact">
+    <div class="container contact-grid">
+      <div>
+        <h2 style="margin-top:0">Get In Touch</h2>
+        <p style="color:rgba(255,255,255,0.85)">Ready to start your next project? Let's talk.</p>
+
+        <!-- Small info boxes -->
+        <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="background:rgba(255,255,255,0.03); padding:8px; border-radius:6px;">Email<br><small style="color:rgba(255,255,255,0.7)">hello@example.com</small></div>
+          <div style="background:rgba(255,255,255,0.03); padding:8px; border-radius:6px;">Phone<br><small style="color:rgba(255,255,255,0.7)">+1 (555) 123-4567</small></div>
+        </div>
+      </div>
+
+      <form class="card-form" onsubmit="event.preventDefault(); alert('Demo form');">
+        <label for="name">Name</label>
+        <input id="name" placeholder="Your name" />
+
+        <label for="email">Email</label>
+        <input id="email" placeholder="you@email.com" />
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me about your project..." rows="5"></textarea>
+
+        <button class="send" type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <footer>
+      © 2024 Simple Portfolio
+    </footer>
+  </section>
+
+</body>
+</html>

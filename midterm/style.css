@@ -1,0 +1,172 @@
+
+/*
+*{
+    box-sizing : border-box;
+}
+
+body{
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p{
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+#projects{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+article {
+    padding: 15px;
+    border: 5px solid #333;
+    box-shadow: 20px 40px 80px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+article:hover{
+    transform: scale(1.05);
+}
+
+img {
+    max-width : 100%;
+    height: auto;
+}
+
+.grid{
+    display : grid;
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: 200px 1fr 100px; /* fixed, flexible, fixed */
+    grid-template-rows: 100px auto 80px;     /* fixed, content-size, fixed */
+    gap: 12px;
+}
+
+.item{
+    background: #e6f0ff;
+    padding: 20px;
+    border: solid 2px #cfe0ff;
+    text-align: center;
+    font-weight: bold;
+}
+
+*/
+
+*{
+    box-sizing: border-box;
+    margin:  0;
+    padding: 0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background-color:#e6f0ff;
+    color:#333;
+    min-height:100vh;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+
+header{
+    background: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin: 0 10px;
+    font-weight:bold;
+    border: 1px solid;
+}
+
+
+nav a:hover{
+    text-decoration: underline0;
+}
+
+.container{
+    display:grid;
+    grid-template-columns: 200px 1fr;
+    gap:20px;
+    padding:20;
+}
+
+aside{
+    background: #e5e7eb;
+    padding:15px;
+    border-radius: 5px;
+}
+aside a:hover{
+    text-decoration: underline;
+}
+
+main{
+    background: white;
+    padding: 20px;
+    border-radius:5px;
+    display: grid;
+    gap:10px;
+}
+
+form{
+    display:grid;
+    gap: 10px;
+}
+
+
+    label {
+      font-weight: bold;
+    }
+
+    
+    button {
+      background: #1e3a8a;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+
+    footer {
+      background: #1e3a8a;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
