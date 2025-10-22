@@ -1,0 +1,919 @@
+<!--<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Business Layout — Structure Only</title>
+
+  <style>
+    /* --------------------------
+       BASIC RESET / LAYOUT HELPERS
+       - Keep default fonts/colors so you focus on layout.
+    ---------------------------*/
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    /* --------------------------
+       HEADER / NAV
+       - three areas: left (brand), center (nav), right (cta)
+    ---------------------------*/
+    header { border-bottom: 1px solid #ddd; background: #fafafa; }
+    .nav { height: 60px; display:flex; align-items:center; justify-content:space-between; gap: 18px; }
+    .brand { font-weight:700; }
+    nav ul { list-style:none; padding:0; margin:0; display:flex; gap:18px; align-items:center; }
+    .nav-cta { padding:8px 12px; border-radius:6px; border:1px solid #ccc; }
+
+    /* --------------------------
+       HERO
+       - big band with left text block and right mock artwork
+       - right mock: rounded rectangle with inner rectangle to mimic frame
+    ---------------------------*/
+    .hero { padding: 64px 0; }
+    .hero-row { display:flex; gap:32px; align-items:center; }
+    .hero-left { flex:1; min-width:220px; }
+    .hero-title { margin:0 0 12px; font-size:28px; line-height:1.05; font-weight:700; }
+    .hero-text { margin:0 0 16px; color:#444; max-width:540px; }
+
+    .hero-right { width:360px; display:flex; justify-content:center; }
+    .frame { width: 320px; height: 200px; border-radius:10px; border:1px solid #bbb; display:flex; align-items:center; justify-content:center; position:relative; }
+    .inner-box { width: 180px; height: 110px; border:1px solid #999; display:flex; align-items:center; justify-content:center; }
+
+    /* --------------------------
+       SERVICES (grid of cards)
+       - 3 columns on wide screens, 1 column on narrow
+    ---------------------------*/
+    .services { padding:56px 0 40px 0; }
+    .services-title { text-align:center; margin:0 0 8px; font-weight:700; }
+    .services-sub { text-align:center; margin:0 0 28px; color:#666; }
+
+    .services-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+    .service-card { border:1px solid #e6e6e6; border-radius:10px; padding:18px; min-height:180px; display:flex; flex-direction:column; align-items:flex-start; }
+    .service-icon { width:56px; height:56px; border-radius:50%; border:1px solid #ccc; margin-bottom:12px; }
+
+    /* --------------------------
+       ABOUT + STATS + IMAGE
+       - two-column section: left text + stats, right frame image
+    ---------------------------*/
+    .about { padding:56px 0; background:#f7f8f8; }
+    .about-grid { display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:center; }
+    .stats { display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin-top:16px; }
+    .stat { border:1px solid #e6e6e6; padding:14px; border-radius:8px; text-align:center; }
+
+    /* --------------------------
+       TEAM (cards in a row)
+       - horizontally scrollable on narrow screens
+    ---------------------------*/
+    .team { padding:56px 0 40px 0; text-align:center; }
+    .team-grid { display:flex; gap:20px; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+    .member { width:220px; border:1px solid #e6e6e6; border-radius:10px; overflow:hidden; background:#fff; }
+    .member-top { height:86px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; }
+    .member-body { padding:12px; text-align:left; }
+
+    /* --------------------------
+       CONTACT (dark band with two columns)
+       - left: info boxes, right: contact form
+    ---------------------------*/
+    .contact { padding:56px 0; background: #2e3a42; color: #fff; }
+    .contact .container { display:grid; grid-template-columns: 1fr 380px; gap:28px; align-items:start; }
+    .info-box { border-radius:8px; padding:12px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
+    .form { border-radius:8px; padding:14px; background: rgba(255,255,255,0.03); }
+    input, textarea, select { width:100%; padding:8px; margin-top:6px; border-radius:6px; border:1px solid rgba(255,255,255,0.08); background:transparent; color:inherit; }
+
+    footer { padding:18px 0; background:#222; color:#ddd; text-align:center; }
+
+    /* --------------------------
+       RESPONSIVE
+       - stack and simplify on narrow screens
+    ---------------------------*/
+    @media (max-width: 1000px) {
+      .hero-row { flex-direction:column; align-items:flex-start; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .team-grid { justify-content:flex-start; overflow-x:auto; padding-bottom:8px; }
+      .contact .container { grid-template-columns: 1fr; }
+      .hero-right { width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">BusinessCorp</div>
+
+      <nav>
+        <ul>
+          <li style="display:inline"><a href="#">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">Get Quote</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-row">
+      <div class="hero-left">
+        <h1 class="hero-title">Professional<br>Business Solutions</h1>
+        <p class="hero-text">We provide comprehensive business services to help your company grow and succeed in today's competitive market.</p>
+
+        <div style="margin-top:18px; display:flex; gap:12px;">
+          <div style="padding:8px 12px; border-radius:6px; border:1px solid #ccc;">Our Services</div>
+          <div style="padding:8px 12px; border-radius:6px; border:1px solid #ccc;">Contact Us</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="frame">
+          <div class="inner-box">Business</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services container">
+    <h2 class="services-title">Our Services</h2>
+    <p class="services-sub">Comprehensive business solutions tailored to your needs</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Business Consulting</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Project Management</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Growth Strategy</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Process Optimization</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Marketing Solutions</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 style="margin:8px 0;">Risk Management</h3>
+        <p style="margin:0;color:#444;font-size:14px;">Short line describing the service.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container about-grid">
+      <div>
+        <h2 style="margin:0 0 8px;">About BusinessCorp</h2>
+        <p style="margin:0;color:#444;">With over 15 years of experience in the business consulting industry...</p>
+
+        <div class="stats">
+          <div class="stat"><strong>500+</strong><div>Projects Completed</div></div>
+          <div class="stat"><strong>98%</strong><div>Client Satisfaction</div></div>
+          <div class="stat"><strong>15+</strong><div>Years Experience</div></div>
+          <div class="stat"><strong>50+</strong><div>Expert Team</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:center;">
+          <div class="frame" style="width:260px; height:260px; border-radius:10px;">
+            <div class="inner-box" style="width:140px; height:140px;">Team</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team container">
+    <h2 style="margin:0 0 8px;">Our Team</h2>
+    <p style="margin:0 0 18px;color:#666;">Meet the experts behind our success.</p>
+
+    <div class="team-grid">
+      <div class="member">
+        <div class="member-top"><div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div></div>
+        <div class="member-body">
+          <strong>Sarah Johnson</strong>
+          <div style="font-size:13px;color:#666">Chief Executive Officer</div>
+          <p style="font-size:13px;color:#444;margin:8px 0 0;">Short bio line about role and experience.</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <div class="member-top"><div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div></div>
+        <div class="member-body">
+          <strong>Michael Chen</strong>
+          <div style="font-size:13px;color:#666">Chief Financial Officer</div>
+          <p style="font-size:13px;color:#444;margin:8px 0 0;">Short bio line about role and experience.</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <div class="member-top"><div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div></div>
+        <div class="member-body">
+          <strong>Emily Rodriguez</strong>
+          <div style="font-size:13px;color:#666">Chief Technology Officer</div>
+          <p style="font-size:13px;color:#444;margin:8px 0 0;">Short bio line about role and experience.</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <div class="member-top"><div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div></div>
+        <div class="member-body">
+          <strong>David Thompson</strong>
+          <div style="font-size:13px;color:#666">Chief Marketing Officer</div>
+          <p style="font-size:13px;color:#444;margin:8px 0 0;">Short bio line about role and experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="container">
+      <div>
+        <h3 style="margin-top:0;">Contact Information</h3>
+        <p style="margin:0 0 12px;color:rgba(255,255,255,0.85);">We are here to help you succeed.</p>
+
+        <div class="info-box">Email<br><small>info@businesscorp.com</small></div>
+        <div class="info-box">Phone<br><small>+1 (555) 123-4567</small></div>
+        <div class="info-box">Address<br><small>123 Business Ave, Suite 100</small></div>
+      </div>
+
+      <div>
+        <form class="form" onsubmit="event.preventDefault(); alert('demo')">
+          <label for="name">Full Name</label>
+          <input id="name" placeholder="Your Full Name" />
+
+          <label for="emailc">Email Address</label>
+          <input id="emailc" placeholder="you@email.com" />
+
+          <label for="company">Company</label>
+          <input id="company" placeholder="Your Company Name" />
+
+          <label for="service">Service Interest</label>
+          <select id="service">
+            <option>Which service interests you?</option>
+          </select>
+
+          <label for="msg">Message</label>
+          <textarea id="msg" rows="5" placeholder="Tell us about your project..."></textarea>
+
+          <div style="margin-top:12px;">
+            <button style="padding:10px 14px; border-radius:6px; border:none; cursor:pointer;">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2024 BusinessCorp — layout demo
+  </footer>
+</body>
+</html>
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BusinessCorp — Layout (structure only)</title>
+
+    <style>
+        /* =====================
+       BASIC RESET
+       Keep default fonts/colors. Use borders & spacing to show structure.
+       ===================== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Container centers content and constrains width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =====================
+       HEADER
+       - Simple three-column layout: left brand, middle nav, right CTA.
+       - Use flex to distribute space.
+       ===================== */
+        header {
+            border-bottom: 1px solid #ddd;
+            background: #fff;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .brand {
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .cta {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        /* =====================
+       HERO
+       - Big horizontal band containing two columns.
+       - Left column: title, paragraph, buttons (flex column)
+       - Right column: visual frame (mock tablet/image)
+       - Use flex for two-column alignment; keep width control on right column
+       ===================== */
+        .hero {
+            padding: 64px 0;
+        }
+
+        .hero-row {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-left {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-title {
+            font-size: 34px;
+            margin: 0 0 12px;
+            font-weight: 700;
+            line-height: 1.02;
+        }
+
+        .hero-desc {
+            margin: 0 0 18px;
+            color: #444;
+            max-width: 560px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+
+        .hero-right {
+            width: 380px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Outer mock frame (rounded rectangle) */
+        .frame {
+            width: 320px;
+            height: 200px;
+            border-radius: 8px;
+            border: 2px solid #bbb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Inner dark rectangle inside frame to mimic screenshot */
+        .frame-inner {
+            width: 200px;
+            height: 120px;
+            border: 1px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =====================
+       SERVICES: heading + grid of 3 columns x 2 rows
+       - Use CSS Grid for this section (precise columns/rows alignment)
+       - Each card has icon area (circle) and text block
+       ===================== */
+        .services {
+            padding: 56px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 0 0 8px;
+            font-weight: 700;
+        }
+
+        .section-sub {
+            text-align: center;
+            margin: 0 0 28px;
+            color: #666;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .service-card {
+            border: 1px solid #e6e6e6;
+            border-radius: 10px;
+            padding: 18px;
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            margin-bottom: 12px;
+        }
+
+        .service-title {
+            margin: 0 0 8px;
+            font-weight: 700;
+        }
+
+        /* =====================
+       ABOUT: two-column area: left text + small stats, right big frame
+       - Use grid to align left and right columns with fixed right width
+       - Stats uses grid 2x2
+       ===================== */
+        .about {
+            padding: 56px 0;
+            background: #f7f8f8;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-text {
+            max-width: 560px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stat {
+            border: 1px solid #e6e6e6;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .about-frame {
+            width: 260px;
+            height: 260px;
+            border-radius: 8px;
+            border: 2px solid #bbb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =====================
+       TEAM: section with cards in a row
+       - Use flexbox to center cards; allow wrap on narrow screens
+       ===================== */
+        .team {
+            padding: 56px 0;
+            text-align: center;
+        }
+
+        .team-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .member {
+            width: 220px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-top {
+            height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .member-body {
+            padding: 12px;
+            text-align: left;
+        }
+
+        /* =====================
+       CONTACT: dark band with two-column form/info layout
+       - Use grid with fixed form column width (right) and fluid left column
+       ===================== */
+        .contact {
+            padding: 56px 0;
+            background: #2f3b44;
+            color: #fff;
+        }
+
+        .contact .container {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .contact-info .info-box {
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .contact-form {
+            border-radius: 8px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: transparent;
+            color: inherit;
+        }
+
+        .submit {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            background: #2fa1ff;
+            color: #fff;
+        }
+
+        /* =====================
+       FOOTER
+       ===================== */
+        footer {
+            padding: 28px 0;
+            text-align: center;
+            color: #222;
+            border-top: 1px solid #ddd;
+        }
+
+        /* =====================
+       RESPONSIVE - stack columns on small screens
+       ===================== */
+        @media (max-width: 980px) {
+            .hero-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-right {
+                width: 100%;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-row {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 12px;
+            }
+
+            .contact .container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-frame {
+                margin-top: 20px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="container header-inner">
+            <!-- left: brand -->
+            <div class="brand">BusinessCorp</div>
+
+            <!-- center: navigation -->
+            <nav>
+                <ul>
+                    <li style="display:inline"><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- right: CTA -->
+            <div class="cta">Get Quote</div>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="container hero-row">
+            <!-- hero left: title + text + actions -->
+            <div class="hero-left">
+                <h1 class="hero-title">Professional Business Solutions</h1>
+                <p class="hero-desc">We provide comprehensive business services to help your company grow and succeed in
+                    today's competitive market. Our expert team delivers results that matter.</p>
+
+                <div class="hero-actions">
+                    <div class="btn">Our Services</div>
+                    <div class="btn">Contact Us</div>
+                </div>
+            </div>
+
+            <!-- hero right: mock frame -->
+            <div class="hero-right">
+                <div class="frame">
+                    <div class="frame-inner">Business</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-sub">Comprehensive business solutions tailored to your needs</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Business Consulting</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Project Management</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Growth Strategy</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Process Optimization</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Marketing Solutions</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3 class="service-title">Risk Management</h3>
+                    <p style="margin:0;color:#444;font-size:14px;">Brief description of the service and what it offers
+                        to clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about">
+        <div class="container about-grid">
+            <!-- left: about text + stats -->
+            <div>
+                <h2 style="margin-top:0;">About BusinessCorp</h2>
+                <p style="margin:0;color:#444;">With over 15 years of experience in the business consulting industry, we
+                    have helped hundreds of companies reach new heights.</p>
+
+                <div class="stats">
+                    <div class="stat"><strong>500+</strong>
+                        <div>Projects Completed</div>
+                    </div>
+                    <div class="stat"><strong>98%</strong>
+                        <div>Client Satisfaction</div>
+                    </div>
+                    <div class="stat"><strong>15+</strong>
+                        <div>Years Experience</div>
+                    </div>
+                    <div class="stat"><strong>50+</strong>
+                        <div>Expert Team</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right: frame visual -->
+            <div style="display:flex; justify-content:center;">
+                <div class="about-frame">
+                    <div
+                        style="width:140px; height:140px; border:1px solid #999; display:flex; align-items:center; justify-content:center;">
+                        Team</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TEAM ================= -->
+    <section class="team">
+        <div class="container">
+            <h2 style="margin:0 0 8px;">Our Team</h2>
+            <p style="margin:0 0 18px;color:#666;">Meet the experts behind our success.</p>
+
+            <div class="team-row">
+                <div class="member">
+                    <div class="member-top">
+                        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div>
+                    </div>
+                    <div class="member-body"><strong>Sarah Johnson</strong>
+                        <div style="font-size:13px;color:#666">CEO</div>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px;">Short bio text about experience.</p>
+                    </div>
+                </div>
+
+                <div class="member">
+                    <div class="member-top">
+                        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div>
+                    </div>
+                    <div class="member-body"><strong>Michael Chen</strong>
+                        <div style="font-size:13px;color:#666">CFO</div>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px;">Short bio text about experience.</p>
+                    </div>
+                </div>
+
+                <div class="member">
+                    <div class="member-top">
+                        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div>
+                    </div>
+                    <div class="member-body"><strong>Emily Rodriguez</strong>
+                        <div style="font-size:13px;color:#666">CTO</div>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px;">Short bio text about experience.</p>
+                    </div>
+                </div>
+
+                <div class="member">
+                    <div class="member-top">
+                        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #ccc;"></div>
+                    </div>
+                    <div class="member-body"><strong>David Thompson</strong>
+                        <div style="font-size:13px;color:#666">CMO</div>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px;">Short bio text about experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="contact">
+        <div class="container">
+            <!-- left: contact info -->
+            <div class="contact-info">
+                <h3 style="margin-top:0;">Contact Information</h3>
+                <p style="margin:0 0 12px;color:rgba(255,255,255,0.85);">Reach out to us for a consultation.</p>
+
+                <div class="info-box">Email<br><small>info@businesscorp.com</small></div>
+                <div class="info-box">Phone<br><small>+1 (555) 123-4567</small></div>
+                <div class="info-box">Address<br><small>123 Business Ave, Suite 100</small></div>
+                <div class="info-box">Hours<br><small>Mon-Fri: 9:00 AM - 6:00 PM</small></div>
+            </div>
+
+            <!-- right: contact form -->
+            <div>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('demo')">
+                    <label for="cname">Full Name</label>
+                    <input id="cname" placeholder="Your full name">
+
+                    <label for="cemail">Email Address</label>
+                    <input id="cemail" placeholder="you@email.com">
+
+                    <label for="ccompany">Company</label>
+                    <input id="ccompany" placeholder="Your company name">
+
+                    <label for="cservice">Service Interest</label>
+                    <select id="cservice">
+                        <option>Which service interests you?</option>
+                    </select>
+
+                    <label for="cmessage">Message</label>
+                    <textarea id="cmessage" rows="5" placeholder="Tell us about your project..."></textarea>
+
+                    <button type="submit" class="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="container">© 2024 BusinessCorp — layout copy (structure only)</div>
+    </footer>
+
+</body>
+
+</html>
